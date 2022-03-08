@@ -1,0 +1,32 @@
+version: '2'
+services:
+  discovery:
+    container_name: discovery
+    build:
+      context: ./discovery
+      dockerfile: ./Dockerfile
+    expose: 
+      - "8761"
+#  greeting-service:
+#    image: scg-demo-service:latest
+#    container_name: greeting-service
+#    expose:
+#      - "8762"
+#    depends_on:
+#      - "registry"
+#    environment:
+#      - JAVA_OPTS=
+#        -DEUREKA_SERVER=http://registry:8761/eureka
+  gateway:
+    container_name: gateway
+    build:
+      context: ./gateway
+      dockerfile: ./Dockerfile
+    ports:
+      - "127.0.0.1:8080:8760"
+    depends_on: 
+      - discovery
+#      - greeting-service
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://registry:8761/eureka
