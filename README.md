@@ -1,4 +1,4 @@
-# cgd-acc-sgil-gateway
+# poc-spring-gateway
 
 Gateway API
 
